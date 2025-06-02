@@ -1,1 +1,63 @@
-/*  your css code here. If applicable */
+body {
+  background: #222;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  background-color: #333;
+  padding: 25px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #0af;
+  width: 320px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  background: #0af;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #07c;
+}
+
+#output {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
