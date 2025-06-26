@@ -1,51 +1,36 @@
-function mincost(arr) {
-  if (arr.length <= 1) return 0;
+function calculateMinCost() {
+  const input = document.getElementById('ropeInput').value;
+  const arr = input.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
 
-  arr.sort((a, b) => a - b);
+  if (arr.length < 2) {
+    document.getElementById('result').innerText = "Please enter at least two valid rope lengths.";
+    return;
+  }
+
+  const minCost = getMinCost(arr);
+  document.getElementById('result').innerText = `Minimum cost to connect ropes: ${minCost}`;
+}
+
+function getMinCost(arr) {
+  const heap = [...arr];
+  heap.sort((a, b) => a - b);
+
   let totalCost = 0;
 
-  while (arr.length > 1) {
-    const first = arr.shift();
-    const second = arr.shift();
-
+  while (heap.length > 1) {
+    const first = heap.shift();
+    const second = heap.shift();
     const cost = first + second;
     totalCost += cost;
 
-    // Insert back the sum maintaining sorted order
-    let inserted = false;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] >= cost) {
-        arr.splice(i, 0, cost);
-        inserted = true;
-        break;
-      }
-    }
-    if (!inserted) {
-      arr.push(cost);
+    // Insert back and keep it sorted
+    const index = heap.findIndex(x => x > cost);
+    if (index === -1) {
+      heap.push(cost);
+    } else {
+      heap.splice(index, 0, cost);
     }
   }
+
   return totalCost;
 }
-
-document.getElementById("calcBtn").addEventListener("click", () => {
-  const input = document.getElementById("ropesInput").value;
-  const output = document.getElementById("output");
-
-  if (!input.trim()) {
-    output.textContent = "Please enter rope lengths.";
-    return;
-  }
-
-  const arr = input
-    .split(",")
-    .map(x => parseInt(x.trim()))
-    .filter(x => !isNaN(x) && x > 0);
-
-  if (arr.length === 0) {
-    output.textContent = "Enter valid positive numbers only.";
-    return;
-  }
-
-  const result = mincost(arr);
-  output.textContent = `Minimum cost: ${result}`;
-});
